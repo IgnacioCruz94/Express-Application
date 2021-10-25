@@ -46,4 +46,34 @@ const validateInput = [
     }
 ];
 
-module.exports = { validateInput };
+const duplicateBooks = [
+    body('title')
+        .if((value, { req }) => {
+            Book.getAll((books) => {
+                const book = books.find(ent => ent.title === value);
+                if (book) { }
+                return true
+            });                         
+        }),
+    body('author')
+        .if((value, { req }) => {
+            Book.getAll((books) => {
+                const book = books.find(ent => ent.author === value);
+                if (book) { }
+                return true
+            });                         
+        }),
+    body('publication_year')
+        .if((value, { req }) => {
+            Book.getAll((books) => {
+                const book = books.find(ent => ent.publication_year === value);
+                if (book) { }
+                return true
+            });                         
+        }),
+    (req, res) => {
+        res.send("This book information already exist!.")
+    },
+];
+
+module.exports = { validateInput, duplicateBooks };
