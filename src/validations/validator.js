@@ -46,11 +46,4 @@ const validateInput = [
     }
 ];
 
-const duplicateBooks = [
-    body('title')
-        .custom((value, { req }) => {
-
-        })
-];
-
 module.exports = { validateInput };
